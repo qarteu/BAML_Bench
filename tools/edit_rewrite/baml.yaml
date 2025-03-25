@@ -1,0 +1,8 @@
+description: Replace the currently displayed lines with <text>
+arguments:
+  text:
+    type: string
+    required: true
+    description: the text to replace the current lines with
+output:
+  type: code

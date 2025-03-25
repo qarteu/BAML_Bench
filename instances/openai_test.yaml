@@ -1,0 +1,43 @@
+- id: openai_issue_590
+  env:
+    type: docker
+    image: python:3.11
+  problem_statement:
+    type: text
+    text: |
+      GitHub: https://github.com/openai/openai-cookbook/issues/590
+
+      Title: Fails to stream on MacOS with multiprocessing
+
+      When running a script with `stream=True` in a multiprocessing context on MacOS,
+      the program hangs indefinitely. This seems to be related to a subprocess spawn 
+      compatibility issue. Need to patch or document a workaround.
+
+- id: openai_issue_342
+  env:
+    type: docker
+    image: python:3.11
+  problem_statement:
+    type: text
+    text: |
+      GitHub: https://github.com/openai/openai-cookbook/issues/342
+
+      Title: Adding max_tokens doesn't seem to work properly
+
+      When setting `max_tokens=1` in a call, the model still returns longer completions. 
+      This could be a bug in OpenAI API behavior or client logic.
+
+- id: openai_issue_488
+  env:
+    type: docker
+    image: python:3.11
+  problem_statement:
+    type: text
+    text: |
+      GitHub: https://github.com/openai/openai-cookbook/issues/488
+
+      Title: Streaming callback inconsistent across models
+
+      When streaming outputs using GPT-4, the callback is called per token. But with 
+      GPT-3.5-turbo, it behaves differently, sometimes batching multiple tokens. 
+      Expected a consistent per-token stream.

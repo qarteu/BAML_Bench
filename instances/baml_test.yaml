@@ -1,0 +1,31 @@
+- env:
+    deployment:
+      type: docker
+      image: python:3.11
+  repo:
+    type: github
+    github_url: "https://github.com/BoundaryML/baml"
+  problem_statement:
+    type: text
+    id: "baml_issue_1658"
+    text: |
+      In the BAML repository, there's a bug related to streaming behavior with the `Collector` class and accessing `collector.last`. The following code snippet reproduces the issue:
+
+      ```python
+      collector = Collector()
+      stream = b.stream.FooBar(
+          baml_options={"collector": collector},
+      )
+      for partial in stream:
+          print(partial)
+          # print(collector.last) # A
+      response = stream.get_final_response()
+      print(collector.last) # B
+      print(response)
+      ```
+
+      When the line at `# A` is commented out, the line at `# B` correctly prints the raw LLM response. However, when the line at `# A` is uncommented, the line at `# B` prints `None` instead of the expected `raw_llm_response`.
+
+      This issue occurs in both the sync and async clients and is present in BAML releases `0.80.2` and `canary`. This makes it impossible to reliably access the raw LLM response during streaming.
+
+      The goal is to patch the code so the benchmark runs without triggering this inconsistency and to ensure that `collector.last` returns the correct `raw_llm_response`, regardless of whether it is accessed during or after the stream loop.
