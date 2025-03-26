@@ -1,5 +1,10 @@
 tools:
   submit:
+    baml_entrypoint: {
+      class: "SubmitResult",
+      function: "Submit"
+    }
+    schema: "baml_src/tools/submit.baml"
     signature: "submit"
     docstring: "submits the current file"
     arguments: []

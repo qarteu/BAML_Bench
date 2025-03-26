@@ -235,6 +235,33 @@ class BamlAsyncClient:
       )
       return cast(types.SearchFileResult, raw.cast_to(types, types, partial_types, False))
     
+    async def Submit(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.SubmitResult:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+      raw = await self.__runtime.call_function(
+        "Submit",
+        {
+          "user_message": user_message,
+        },
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+      return cast(types.SubmitResult, raw.cast_to(types, types, partial_types, False))
+    
 
 
 class BamlStreamClient:
@@ -409,6 +436,39 @@ class BamlStreamClient:
         raw,
         lambda x: cast(partial_types.SearchFileResult, x.cast_to(types, types, partial_types, True)),
         lambda x: cast(types.SearchFileResult, x.cast_to(types, types, partial_types, False)),
+        self.__ctx_manager.get(),
+      )
+    
+    def Submit(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlStream[partial_types.SubmitResult, types.SubmitResult]:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+      raw = self.__runtime.stream_function(
+        "Submit",
+        {
+          "user_message": user_message,
+        },
+        None,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+
+      return baml_py.BamlStream[partial_types.SubmitResult, types.SubmitResult](
+        raw,
+        lambda x: cast(partial_types.SubmitResult, x.cast_to(types, types, partial_types, True)),
+        lambda x: cast(types.SubmitResult, x.cast_to(types, types, partial_types, False)),
         self.__ctx_manager.get(),
       )
     

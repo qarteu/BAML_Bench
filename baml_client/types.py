@@ -73,3 +73,6 @@ class SearchFileResult(BaseModel):
     search_term: str
     file: Optional[str] = None
     matches: List[str]
+
+class SubmitResult(BaseModel):
+    status: str
