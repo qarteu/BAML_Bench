@@ -58,3 +58,18 @@ class ExtractIssueMetadata(BaseModel):
     fix_summary: str
     test_coverage: str
     solved: bool
+
+class FindFileResult(BaseModel):
+    file_name: str
+    dir: Optional[str] = None
+    matches: List[str]
+
+class SearchDirResult(BaseModel):
+    search_term: str
+    dir: Optional[str] = None
+    matches: List[str]
+
+class SearchFileResult(BaseModel):
+    search_term: str
+    file: Optional[str] = None
+    matches: List[str]

@@ -89,6 +89,84 @@ class LlmResponseParser:
 
       return cast(types.ExtractIssueMetadata, parsed)
     
+    def FindFile(
+        self,
+        llm_response: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.FindFileResult:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      parsed = self.__runtime.parse_llm_response(
+        "FindFile",
+        llm_response,
+        types,
+        types,
+        partial_types,
+        False,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+
+      return cast(types.FindFileResult, parsed)
+    
+    def SearchDir(
+        self,
+        llm_response: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.SearchDirResult:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      parsed = self.__runtime.parse_llm_response(
+        "SearchDir",
+        llm_response,
+        types,
+        types,
+        partial_types,
+        False,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+
+      return cast(types.SearchDirResult, parsed)
+    
+    def SearchFile(
+        self,
+        llm_response: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.SearchFileResult:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      parsed = self.__runtime.parse_llm_response(
+        "SearchFile",
+        llm_response,
+        types,
+        types,
+        partial_types,
+        False,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+
+      return cast(types.SearchFileResult, parsed)
+    
 
 
 class LlmStreamParser:
@@ -151,6 +229,84 @@ class LlmStreamParser:
       )
 
       return cast(partial_types.ExtractIssueMetadata, parsed)
+    
+    def FindFile(
+        self,
+        llm_response: str,
+        baml_options: BamlCallOptions = {},
+    ) -> partial_types.FindFileResult:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      parsed = self.__runtime.parse_llm_response(
+        "FindFile",
+        llm_response,
+        types,
+        types,
+        partial_types,
+        True,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+
+      return cast(partial_types.FindFileResult, parsed)
+    
+    def SearchDir(
+        self,
+        llm_response: str,
+        baml_options: BamlCallOptions = {},
+    ) -> partial_types.SearchDirResult:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      parsed = self.__runtime.parse_llm_response(
+        "SearchDir",
+        llm_response,
+        types,
+        types,
+        partial_types,
+        True,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+
+      return cast(partial_types.SearchDirResult, parsed)
+    
+    def SearchFile(
+        self,
+        llm_response: str,
+        baml_options: BamlCallOptions = {},
+    ) -> partial_types.SearchFileResult:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      parsed = self.__runtime.parse_llm_response(
+        "SearchFile",
+        llm_response,
+        types,
+        types,
+        partial_types,
+        True,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+      )
+
+      return cast(partial_types.SearchFileResult, parsed)
     
 
 

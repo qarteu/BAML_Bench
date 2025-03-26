@@ -1,5 +1,11 @@
+# tools/search/config.yaml
 tools:
   find_file:
+    baml_entrypoint: {
+      class: "FindFileResult",
+      function: "FindFile"
+    }
+    schema: "baml_src/tools/search.baml"
     signature: "find_file <file_name> [<dir>]"
     docstring: "finds all files with the given name or pattern in dir. If dir is not provided, searches in the current directory"
     arguments:
@@ -11,7 +17,13 @@ tools:
         type: string
         description: "the directory to search in (if not provided, searches in the current directory)"
         required: false
+
   search_dir:
+    baml_entrypoint: {
+      class: "SearchDirResult",
+      function: "SearchDir"
+    }
+    schema: "baml_src/tools/search.baml"
     signature: "search_dir <search_term> [<dir>]"
     docstring: "searches for search_term in all files in dir. If dir is not provided, searches in the current directory"
     arguments:
@@ -23,7 +35,13 @@ tools:
         type: string
         description: "the directory to search in (if not provided, searches in the current directory)"
         required: false
+
   search_file:
+    baml_entrypoint: {
+      class: "SearchFileResult",
+      function: "SearchFile"
+    }
+    schema: "baml_src/tools/search.baml"
     signature: "search_file <search_term> [<file>]"
     docstring: "searches for search_term in file. If file is not provided, searches in the current open file"
     arguments:

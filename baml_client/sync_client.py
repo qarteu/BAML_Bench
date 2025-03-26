@@ -152,6 +152,87 @@ class BamlSyncClient:
       )
       return cast(types.ExtractIssueMetadata, raw.cast_to(types, types, partial_types, False))
     
+    def FindFile(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.FindFileResult:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+
+      raw = self.__runtime.call_function_sync(
+        "FindFile",
+        {
+          "user_message": user_message,
+        },
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+      return cast(types.FindFileResult, raw.cast_to(types, types, partial_types, False))
+    
+    def SearchDir(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.SearchDirResult:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+
+      raw = self.__runtime.call_function_sync(
+        "SearchDir",
+        {
+          "user_message": user_message,
+        },
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+      return cast(types.SearchDirResult, raw.cast_to(types, types, partial_types, False))
+    
+    def SearchFile(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.SearchFileResult:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+
+      raw = self.__runtime.call_function_sync(
+        "SearchFile",
+        {
+          "user_message": user_message,
+        },
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+      return cast(types.SearchFileResult, raw.cast_to(types, types, partial_types, False))
+    
 
 
 
@@ -230,6 +311,108 @@ class BamlStreamClient:
         raw,
         lambda x: cast(partial_types.ExtractIssueMetadata, x.cast_to(types, types, partial_types, True)),
         lambda x: cast(types.ExtractIssueMetadata, x.cast_to(types, types, partial_types, False)),
+        self.__ctx_manager.get(),
+      )
+    
+    def FindFile(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlSyncStream[partial_types.FindFileResult, types.FindFileResult]:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+
+      raw = self.__runtime.stream_function_sync(
+        "FindFile",
+        {
+          "user_message": user_message,
+        },
+        None,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+
+      return baml_py.BamlSyncStream[partial_types.FindFileResult, types.FindFileResult](
+        raw,
+        lambda x: cast(partial_types.FindFileResult, x.cast_to(types, types, partial_types, True)),
+        lambda x: cast(types.FindFileResult, x.cast_to(types, types, partial_types, False)),
+        self.__ctx_manager.get(),
+      )
+    
+    def SearchDir(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlSyncStream[partial_types.SearchDirResult, types.SearchDirResult]:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+
+      raw = self.__runtime.stream_function_sync(
+        "SearchDir",
+        {
+          "user_message": user_message,
+        },
+        None,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+
+      return baml_py.BamlSyncStream[partial_types.SearchDirResult, types.SearchDirResult](
+        raw,
+        lambda x: cast(partial_types.SearchDirResult, x.cast_to(types, types, partial_types, True)),
+        lambda x: cast(types.SearchDirResult, x.cast_to(types, types, partial_types, False)),
+        self.__ctx_manager.get(),
+      )
+    
+    def SearchFile(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlSyncStream[partial_types.SearchFileResult, types.SearchFileResult]:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+
+      raw = self.__runtime.stream_function_sync(
+        "SearchFile",
+        {
+          "user_message": user_message,
+        },
+        None,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+
+      return baml_py.BamlSyncStream[partial_types.SearchFileResult, types.SearchFileResult](
+        raw,
+        lambda x: cast(partial_types.SearchFileResult, x.cast_to(types, types, partial_types, True)),
+        lambda x: cast(types.SearchFileResult, x.cast_to(types, types, partial_types, False)),
         self.__ctx_manager.get(),
       )
     
