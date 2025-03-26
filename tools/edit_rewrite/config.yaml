@@ -1,10 +1,13 @@
 tools:
   edit:
-
-    #points to baml entrypoint
-    baml_entrypoint: "EditRewrite" 
+    baml_entrypoint: {
+       # Points to our BAML class definition
+      class: "EditRewrite",
+      #points to the function that returns EditRewrite
+      function: "EditFile"     
+    }
     #points to baml schema ? --> check this
-    schema: "baml_src/tools/edit_rewrite.baml" 
+    schema: "baml_src/tools/edit_rewrite.baml"  
     signature: |
       edit <text>
     docstring: >

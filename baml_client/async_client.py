@@ -100,6 +100,33 @@ class BamlAsyncClient:
       return self.__llm_stream_parser
 
     
+    async def EditFile(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> types.EditRewrite:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+      raw = await self.__runtime.call_function(
+        "EditFile",
+        {
+          "user_message": user_message,
+        },
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+      return cast(types.EditRewrite, raw.cast_to(types, types, partial_types, False))
+    
     async def ExtractStuff(
         self,
         resume: str,
@@ -138,6 +165,39 @@ class BamlStreamClient:
       self.__ctx_manager = ctx_manager
       self.__baml_options = baml_options or {}
 
+    
+    def EditFile(
+        self,
+        user_message: str,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlStream[partial_types.EditRewrite, types.EditRewrite]:
+      options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+      raw = self.__runtime.stream_function(
+        "EditFile",
+        {
+          "user_message": user_message,
+        },
+        None,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+      )
+
+      return baml_py.BamlStream[partial_types.EditRewrite, types.EditRewrite](
+        raw,
+        lambda x: cast(partial_types.EditRewrite, x.cast_to(types, types, partial_types, True)),
+        lambda x: cast(types.EditRewrite, x.cast_to(types, types, partial_types, False)),
+        self.__ctx_manager.get(),
+      )
     
     def ExtractStuff(
         self,
