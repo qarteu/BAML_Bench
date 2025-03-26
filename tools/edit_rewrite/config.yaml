@@ -1,5 +1,10 @@
 tools:
   edit:
+
+    #points to baml entrypoint
+    baml_entrypoint: "EditRewrite" 
+    #points to baml schema ? --> check this
+    schema: "baml_src/tools/edit_rewrite.baml" 
     signature: |
       edit <text>
     docstring: >

@@ -29,3 +29,9 @@ tools:
         type: string
         description: "the text to replace the current selection with"
         required: true
+
+
+#figure out where its loading the config file   uses the same specfiied strucutre rewrite the tools give the baml version of the prompt but will have the same strucuture use the swe-agent predetermiend schema for that 
+
+#generate baml call function from sync client exporeted using sync  
+

@@ -35,6 +35,10 @@ class StreamState(BaseModel, Generic[T]):
     state: Literal["Pending", "Incomplete", "Complete"]
 
 
+class EditRewrite(BaseModel):
+    text: Optional[str] = None
+    modified_path: Optional[str] = None
+
 class ExtractIssueMetadata(BaseModel):
     repo: Optional[str] = None
     issue_id: Optional[str] = None

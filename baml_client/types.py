@@ -40,6 +40,10 @@ def all_succeeded(checks: Dict[CheckName, Check]) -> bool:
 
 
 
+class EditRewrite(BaseModel):
+    text: str
+    modified_path: str
+
 class ExtractIssueMetadata(BaseModel):
     repo: str
     issue_id: str
