@@ -1,5 +1,5 @@
 from baml_client import b   
-from baml_client.types import EditRewrite, FindFileResult, SearchDirResult, SearchFileResult, SubmitResult, ReviewOnSubmitResult, EditLintingResult
+from baml_client.types import EditRewrite, FindFileResult, SearchDirResult, SearchFileResult, SubmitResult, ReviewOnSubmitResult, EditLintingResult, FileMapResult
 import os
 
 def test_edit():
@@ -57,6 +57,13 @@ def test_edit_linting():
     print(f"End line: {lint_info.end_line}")
     print(f"Replacement text: {lint_info.replacement_text}")
 
+def test_filemap():
+    file_info = b.FileMap("Show me the contents of main.py")
+    print("\nFileMap Test Results:")
+    assert isinstance(file_info, FileMapResult)
+    print(f"File path: {file_info.file_path}")
+    print(f"Content: {file_info.content}")
+
 def main():
     #API key verification
     if not os.getenv("OPENAI_API_KEY"):
@@ -68,6 +75,7 @@ def main():
     test_submit()
     test_review_on_submit()
     test_edit_linting()
+    test_filemap()
 
 
 if __name__ == '__main__':

@@ -1,5 +1,10 @@
 tools:
   filemap:
+    baml_entrypoint: {
+      class: "FileMapResult",
+      function: "FileMap"
+    }
+    schema: "baml_src/tools/filemap.baml"
     signature: "filemap <file_path>"
     docstring: "Print the contents of a Python file, skipping lengthy function and method definitions."
     arguments:
