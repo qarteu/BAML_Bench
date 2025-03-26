@@ -1,5 +1,5 @@
 from baml_client import b   
-from baml_client.types import EditRewrite, FindFileResult, SearchDirResult, SearchFileResult, SubmitResult, ReviewOnSubmitResult, EditLintingResult, FileMapResult
+from baml_client.types import EditRewrite, FindFileResult, SearchDirResult, SearchFileResult, SubmitResult, ReviewOnSubmitResult, EditLintingResult, FileMapResult, EditAnthropicResult
 import os
 
 def test_edit():
@@ -64,6 +64,14 @@ def test_filemap():
     print(f"File path: {file_info.file_path}")
     print(f"Content: {file_info.content}")
 
+def test_edit_anthropic():
+    edit_info = b.EditAnthropic("View lines 1-10 of main.py")
+    print("\nEdit Anthropic Test Results:")
+    assert isinstance(edit_info, EditAnthropicResult)
+    print(f"Command: {edit_info.command}")
+    print(f"Path: {edit_info.path}")
+    print(f"View Range: {edit_info.view_range}")
+
 def main():
     #API key verification
     if not os.getenv("OPENAI_API_KEY"):
@@ -76,6 +84,7 @@ def main():
     test_review_on_submit()
     test_edit_linting()
     test_filemap()
+    test_edit_anthropic()
 
 
 if __name__ == '__main__':

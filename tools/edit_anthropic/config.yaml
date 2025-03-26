@@ -1,5 +1,10 @@
 tools:
   str_replace_editor:
+    baml_entrypoint: {
+      class: "EditAnthropicResult",
+      function: "EditAnthropic"
+    }
+    schema: "baml_src/tools/edit_anthropic.baml"
     signature: |
       str_replace_editor <command> <path> [<file_text>] [<view_range>] [<old_str>] [<new_str>] [<insert_line>]
     # This docstrings was taken from openhands:
