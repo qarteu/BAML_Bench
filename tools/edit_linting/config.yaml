@@ -1,5 +1,10 @@
 tools:
   edit:
+    baml_entrypoint: {
+      class: "EditLintingResult",
+      function: "EditLinting"
+    }
+    schema: "baml_src/tools/edit_linting.baml"
     signature: |
       edit <start_line>:<end_line>
       <replacement_text>

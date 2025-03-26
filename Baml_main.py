@@ -1,5 +1,5 @@
 from baml_client import b   
-from baml_client.types import EditRewrite, FindFileResult, SearchDirResult, SearchFileResult, SubmitResult, ReviewOnSubmitResult
+from baml_client.types import EditRewrite, FindFileResult, SearchDirResult, SearchFileResult, SubmitResult, ReviewOnSubmitResult, EditLintingResult
 import os
 
 def test_edit():
@@ -49,6 +49,14 @@ def test_review_on_submit():
     print("Review Comments:", review_info.review_comments)
     print("Files Reviewed:", review_info.files_reviewed)
 
+def test_edit_linting():
+    lint_info = b.EditLinting("Fix indentation in lines 5-10")
+    print("\nEdit Linting Test Results:")
+    assert isinstance(lint_info, EditLintingResult)
+    print(f"Start line: {lint_info.start_line}")
+    print(f"End line: {lint_info.end_line}")
+    print(f"Replacement text: {lint_info.replacement_text}")
+
 def main():
     #API key verification
     if not os.getenv("OPENAI_API_KEY"):
@@ -59,6 +67,7 @@ def main():
     test_search()
     test_submit()
     test_review_on_submit()
+    test_edit_linting()
 
 
 if __name__ == '__main__':
