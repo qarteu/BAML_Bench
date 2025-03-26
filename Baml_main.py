@@ -1,5 +1,5 @@
 from baml_client import b   
-from baml_client.types import EditRewrite, FindFileResult, SearchDirResult, SearchFileResult, SubmitResult
+from baml_client.types import EditRewrite, FindFileResult, SearchDirResult, SearchFileResult, SubmitResult, ReviewOnSubmitResult
 import os
 
 def test_edit():
@@ -41,6 +41,14 @@ def test_submit():
     assert isinstance(submit_info, SubmitResult)
     print(f"Status: {submit_info.status}")
 
+def test_review_on_submit():
+    review_info = b.ReviewOnSubmit("Review my changes before submission")
+    print("\nReview On Submit Test Results:")
+    assert isinstance(review_info, ReviewOnSubmitResult)
+    print(f"Status: {review_info.status}")
+    print("Review Comments:", review_info.review_comments)
+    print("Files Reviewed:", review_info.files_reviewed)
+
 def main():
     #API key verification
     if not os.getenv("OPENAI_API_KEY"):
@@ -50,6 +58,7 @@ def main():
     test_edit()
     test_search()
     test_submit()
+    test_review_on_submit()
 
 
 if __name__ == '__main__':
