@@ -52,7 +52,7 @@ jobs:
         with:
           pytest-args: '--cov -n auto -s'
       - name: Upload logs & trajectories
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: trajectories-py${{ matrix.python-version }}
